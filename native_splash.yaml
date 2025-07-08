@@ -1,0 +1,14 @@
+flutter_native_splash:
+  color: "#7dbd1d"
+  image: assets/images/splash_logo.png
+  android: true
+  ios: true
+  web: false
+  android_gravity: center
+  ios_content_mode: scaleAspectFill
+  
+
+  android_12:
+    color: "#7dbd1d"
+    image: assets/images/android_splash_logo.png
+     
