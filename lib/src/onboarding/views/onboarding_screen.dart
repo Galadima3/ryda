@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ryda/main.dart';
-import 'package:ryda/src/onboarding/intro_screen.dart';
-import 'package:ryda/src/onboarding/onboarding_service.dart';
+import 'package:ryda/src/onboarding/views/intro_screen.dart';
+import 'package:ryda/src/onboarding/service/onboarding_service.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -112,17 +113,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             : nextPage,
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(Colors.black),
-                      minimumSize: WidgetStateProperty.all(Size(25, 29)),
+                      minimumSize: WidgetStateProperty.all(Size(25.w, 29.h)),
                       shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
                       ),
                     ),
                     //color: Colors.transparent,
                     child: Text(
                       onLastPage ? 'Done' : 'Next',
-                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: Colors.white, fontSize: 16.sp),
                     ),
                   ),
                 ],

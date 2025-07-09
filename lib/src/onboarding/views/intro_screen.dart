@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class IntroScreen extends StatelessWidget {
-  
   final String title;
   final String subtitle;
   final String image;
   const IntroScreen({
     super.key,
-    
-    required this.title, required this.subtitle, required this.image,
+    required this.title,
+    required this.subtitle,
+    required this.image,
   });
 
   @override
@@ -15,33 +17,34 @@ class IntroScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-         Spacer(flex: 1),
-        
+        Spacer(flex: 1),
+
         Container(
-          height: 250,
-          width: 250,
+          height: 250.h,
+          width: 250.w,
           decoration: BoxDecoration(
-            //color: backgroundColor,
-            image: DecorationImage(image: AssetImage("assets/images/onboarding/$image")),
+            image: DecorationImage(
+              image: AssetImage("assets/images/onboarding/$image"),
+            ),
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        SizedBox(height: 12),
+        SizedBox(height: 12.h),
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: 24.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 12),
+        SizedBox(height: 12.h),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.black, fontSize: 16),
+            style: TextStyle(color: Colors.black, fontSize: 16.sp),
           ),
         ),
         Spacer(flex: 2),

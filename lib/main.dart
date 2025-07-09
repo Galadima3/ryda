@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ryda/src/onboarding/onboarding_screen.dart';
-import 'package:ryda/src/onboarding/onboarding_service.dart';
+import 'package:ryda/src/onboarding/views/onboarding_screen.dart';
+import 'package:ryda/src/onboarding/service/onboarding_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             textTheme: GoogleFonts.montserratTextTheme()
           ),
           debugShowCheckedModeBanner: false,
@@ -82,19 +81,3 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-//TODO: Find a better loc.
-extension SpacingExtension on SizedBox {
-  static SizedBox height(double height) => SizedBox(height: height);
-  static SizedBox width(double width) => SizedBox(width: width);
-  
-  // Common spacing values
-  static const SizedBox small = SizedBox(height: 8.0);
-  static const SizedBox medium = SizedBox(height: 16.0);
-  static const SizedBox large = SizedBox(height: 24.0);
-  static const SizedBox extraLarge = SizedBox(height: 32.0);
-  
-  // Horizontal spacing
-  static const SizedBox smallHorizontal = SizedBox(width: 8.0);
-  static const SizedBox mediumHorizontal = SizedBox(width: 16.0);
-  static const SizedBox largeHorizontal = SizedBox(width: 24.0);
-}
