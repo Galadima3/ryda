@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ryda/main.dart';
+import 'package:ryda/src/auth/views/screens/register_view.dart';
 import 'package:ryda/src/onboarding/views/intro_screen.dart';
 import 'package:ryda/src/onboarding/service/onboarding_service.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -104,7 +104,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return HomeScreen(title: "Home");
+                                     return RegisterView();
                                     },
                                   ),
                                 );

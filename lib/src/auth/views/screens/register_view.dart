@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ryda/src/auth/service/firebase_auth_service.dart';
-import 'package:ryda/src/auth/views/custom_snackbar_widget.dart';
-import 'package:ryda/src/auth/views/custom_text_field.dart';
+import 'package:ryda/src/auth/views/widgets/custom_snackbar_widget.dart';
+import 'package:ryda/src/auth/views/widgets/custom_text_field.dart';
+import 'package:ryda/src/auth/views/widgets/form_validators.dart';
+import 'package:ryda/src/auth/views/screens/login_view.dart';
 
 /// --- Providers ---
 final emailProvider = StateProvider<String>((ref) => '');
@@ -43,19 +45,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.trim().isEmpty) return 'Email is required';
-    final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w]{2,4}$');
-    if (!emailRegex.hasMatch(value)) return 'Enter a valid email';
-    return null;
-  }
-
-  String? _validatePassword(String? value) {
-    if (value == null || value.trim().isEmpty) return 'Password is required';
-    if (value.length < 6) return 'Minimum 6 characters';
-    return null;
   }
 
   Future<void> register({
@@ -134,7 +123,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   label: "Email",
                   icon: Icons.email,
                   keyboardType: TextInputType.emailAddress,
-                  validator: _validateEmail,
+                  validator: FormValidators.validateEmail,
                   onChanged:
                       (val) => ref.read(emailProvider.notifier).state = val,
                 ),
@@ -145,7 +134,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   label: "Password",
                   icon: Icons.lock,
                   keyboardType: TextInputType.visiblePassword,
-                  validator: _validatePassword,
+                  validator: FormValidators.validatePassword,
                   obscureText: true,
                   onChanged:
                       (val) => ref.read(passwordProvider.notifier).state = val,
@@ -177,7 +166,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             : null,
                     label:
                         isLoading
-                            ? CircularProgressIndicator.adaptive(value: 5,backgroundColor: Colors.white,)
+                            ? CircularProgressIndicator(
+                              value: 5,
+                              backgroundColor: Colors.white,
+                            )
                             : const Text(
                               "Continue",
                               style: TextStyle(color: Colors.white),
@@ -193,9 +185,15 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   ),
                 ),
                 SizedBox(height: 17.5.h),
-                const Text(
-                  "Already have an account?",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                TextButton(
+                  child: Text(
+                    "Already have an account?",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onPressed:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => LoginView()),
+                      ),
                 ),
               ],
             ),

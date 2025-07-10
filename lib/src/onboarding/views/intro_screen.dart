@@ -18,7 +18,6 @@ class IntroScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Spacer(flex: 1),
-
         Container(
           height: 250.h,
           width: 250.w,
