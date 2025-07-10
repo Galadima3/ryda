@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ryda/src/auth/service/auth_service.dart';
 
@@ -59,8 +60,54 @@ class FirebaseAuthService implements AuthService {
       rethrow;
     }
   }
+
+  // Send OTP
+  Future<void> sendOtp({
+    required String phoneNumber,
+    required Function(String verificationId) onCodeSent,
+    required Function(FirebaseAuthException e) onFailed,
+  }) async {
+    await _firebaseAuth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      timeout: const Duration(seconds: 60),
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        // Auto-complete (optional)
+      },
+      verificationFailed: onFailed,
+      codeSent: (String verificationId, int? resendToken) {
+        onCodeSent(verificationId);
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
+
+
+  // Verify OTP and link with email
+    Future<void> verifyOtpAndCreateAccount({
+    required String email,
+    required String password,
+    required String otpCode,
+    required String verificationId,
+  }) async {
+    final PhoneAuthCredential phoneCredential = PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: otpCode,
+    );
+
+    final userCredential = await _firebaseAuth.signInWithCredential(phoneCredential);
+
+    await userCredential.user?.verifyBeforeUpdateEmail(email);
+
+    // Optional: create password for email login
+    final emailCred = EmailAuthProvider.credential(email: email, password: password);
+    await userCredential.user?.linkWithCredential(emailCred);
+  }
+
 }
 
+final firebaseAuthServiceProvider = Provider((ref) {
+  return FirebaseAuthService(firebaseAuth: FirebaseAuth.instance);
+});
 
 // --- Helper for User-Friendly Error Messages ---
 String getFirebaseAuthErrorMessage(FirebaseAuthException e) {

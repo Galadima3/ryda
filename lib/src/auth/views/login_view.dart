@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,50 +12,7 @@ class LoginView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Function to show a SnackBar message.
-    // Function to show a beautifully styled SnackBar message.
-    // void showSnackBar(String message, {bool isError = false}) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(
-    //       content: Row(
-    //         children: [
-    //           Icon(
-    //             isError ? Icons.error_outline : Icons.check_circle_outline,
-    //             color: Colors.white,
-    //             size: 24.sp,
-    //           ),
-    //           SizedBox(width: 10.w),
-    //           Expanded(
-    //             child: Text(
-    //               message,
-    //               style: TextStyle(
-    //                 color: Colors.white,
-    //                 fontSize: 14.sp,
-    //                 fontWeight: FontWeight.w500,
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //       backgroundColor: isError ? Colors.red[700] : Colors.green[700],
-    //       duration: const Duration(seconds: 4),
-    //       behavior: SnackBarBehavior.floating,
-    //       shape: RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.circular(10.r),
-    //       ),
-    //       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-    //       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-    //       elevation: 6,
-    //       // action: SnackBarAction(
-    //       //   label: 'DISMISS',
-    //       //   textColor: Colors.white,
-    //       //   onPressed: () {
-    //       //     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    //       //   },
-    //       // ),
-    //     ),
-    //   );
-    // }
+    
 
     void loginWithDummy() async {
       try {
@@ -61,7 +20,7 @@ class LoginView extends ConsumerWidget {
           firebaseAuth: FirebaseAuth.instance,
         ).login(email: 'test@example.com', password: 'password123');
       } on FirebaseAuthException catch (e) {
-        //showSnackBar(getFirebaseAuthErrorMessage(e), isError: true);
+        
         CustomSnackBar.show(
           context,
           getFirebaseAuthErrorMessage(e),
