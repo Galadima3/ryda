@@ -56,7 +56,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
     });
     try {
       final authService = FirebaseAuthService(
-        firebaseAuth: FirebaseAuth.instance,
+        firebaseAuth: ref.watch(authInstanceProvider)
       );
       await authService.register(email: email, password: password);
     } on FirebaseAuthException catch (e) {

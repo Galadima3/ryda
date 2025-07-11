@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:ryda/main.dart';
 import 'package:ryda/src/auth/views/screens/login_view.dart';
+import 'package:ryda/src/map/home_view.dart';
 import 'package:ryda/src/onboarding/views/onboarding_screen.dart';
 
 class App extends StatefulWidget {

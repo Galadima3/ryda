@@ -49,7 +49,8 @@ class _LoginViewState extends ConsumerState<LoginView> {
   Future<void> login({required String email, required String password}) async {
     try {
       final authService = FirebaseAuthService(
-        firebaseAuth: FirebaseAuth.instance,
+        //firebaseAuth: FirebaseAuth.instance,
+        firebaseAuth: ref.watch(authInstanceProvider)
       );
       await authService.login(email: email, password: password);
       // Navigate or show success

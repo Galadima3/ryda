@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ryda/src/auth/service/auth_service.dart';
 
 class FirebaseAuthService implements AuthService {
@@ -60,6 +61,11 @@ class FirebaseAuthService implements AuthService {
   }
 
 }
+
+// Provider && //TODO: Observe this
+final authInstanceProvider = Provider<FirebaseAuth>((ref) {
+  return FirebaseAuth.instance;
+});
 
 // --- Helper for User-Friendly Error Messages ---
 String getFirebaseAuthErrorMessage(FirebaseAuthException e) {
